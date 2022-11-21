@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000033"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -43,10 +44,12 @@
             android:layout_height="48dp"
             android:layout_marginRight="20dp"
             android:layout_weight="1"
+            android:backgroundTint="#BCCBD3"
             android:ems="10"
             android:inputType="numberDecimal"
             android:text="1"
             android:textAlignment="center"
+            android:textColor="#EFEFEF"
             tools:layout_editor_absoluteX="230dp"
             tools:layout_editor_absoluteY="56dp" />
 
@@ -69,15 +72,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#EFEFEF"
         tools:context=".MainActivity">
-    <ListView
-        android:id="@+id/MainListView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <ListView
+            android:id="@+id/MainListView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#F8F3F3"
+            android:cacheColorHint="#EFEFEF"
+            android:textFilterEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
     </LinearLayout>
 
 </LinearLayout>

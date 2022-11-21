@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000033"
     tools:context=".AboutMeActivity">
 
     <TextView
@@ -12,97 +13,145 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
         android:text="Account Details"
+        android:textColor="#EFEFEF"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/AboutMeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="24dp"
-        android:text="Name"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AboutMeDetail" />
 
-    <TextView
-        android:id="@+id/AboutMeEmail"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="24dp"
-        android:text="Email"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AboutMeName" />
+        android:layout_marginTop="36dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/AboutMeDetail"
+        tools:layout_editor_absoluteX="0dp">
 
-    <TextView
-        android:id="@+id/AboutMeBalance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="24dp"
-        android:text="Balance"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AboutMeEmail" />
+        <TextView
+            android:id="@+id/AboutMeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="56dp"
+            android:text="Name"
+            android:textColor="#EFEFEF"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="56dp"
+            tools:layout_editor_absoluteY="157dp" />
 
-    <EditText
-        android:id="@+id/AboutMeAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Amount"
-        android:inputType="number"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AboutMeBalance" />
+        <TextView
+            android:id="@+id/AboutMeInputName"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="56dp"
+            android:gravity="right"
+            android:text="Albertus"
+            android:textColor="#EFEFEF"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="296dp"
+            tools:layout_editor_absoluteY="157dp" />
 
-    <Button
-        android:id="@+id/AboutMeTopUpButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="36dp"
-        android:text="Top Up"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aboutMeInputBalance" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/AboutMeInputName"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="40dp"
-        android:text="Albertus"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AboutMeDetail" />
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:layout_editor_absoluteX="16dp">
 
-    <TextView
-        android:id="@+id/aboutMeInputEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="36dp"
-        android:text="albertus@ui.ac.id"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AboutMeInputName" />
+        <TextView
+            android:id="@+id/AboutMeEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="56dp"
+            android:text="Email"
+            android:textColor="#EFEFEF"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="56dp"
+            tools:layout_editor_absoluteY="208dp" />
 
-    <TextView
-        android:id="@+id/aboutMeInputBalance"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/aboutMeInputEmail"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="56dp"
+            android:gravity="right"
+            android:text="albertus@ui.ac.id"
+            android:textColor="#EFEFEF"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="219dp"
+            tools:layout_editor_absoluteY="208dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="40dp"
-        android:text="0.0"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aboutMeInputEmail" />
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:id="@+id/AboutMeBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="56dp"
+            android:text="Balance"
+            android:textColor="#EFEFEF"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="56dp"
+            tools:layout_editor_absoluteY="259dp" />
+
+        <TextView
+            android:id="@+id/aboutMeInputBalance"
+            android:layout_width="219dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="56dp"
+            android:gravity="right"
+            android:text="0.0"
+            android:textColor="#EFEFEF"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="343dp"
+            tools:layout_editor_absoluteY="259dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        tools:layout_editor_absoluteX="0dp">
+
+        <EditText
+            android:id="@+id/AboutMeAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#57687A"
+            android:ems="10"
+            android:hint="Amount"
+            android:inputType="number"
+            android:textColor="#EFEFEF"
+            android:textColorHint="#959595"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="50dp"
+            tools:layout_editor_absoluteY="302dp" />
+
+        <Button
+            android:id="@+id/AboutMeTopUpButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Top Up"
+            tools:layout_editor_absoluteX="286dp"
+            tools:layout_editor_absoluteY="302dp" />
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
