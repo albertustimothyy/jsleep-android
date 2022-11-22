@@ -23,9 +23,12 @@ import java.util.List;
 
 import com.google.gson.Gson;
 
+import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.Account;
 import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.Room;
 
 public class MainActivity extends AppCompatActivity {
+    public static Account loginAccount;
+    public static Account registerAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

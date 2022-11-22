@@ -51,10 +51,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Account account = requestAccount();
-                Intent move = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(move);
-                Toast toast = Toast.makeText(getApplicationContext(), "Log In Successful", Toast.LENGTH_SHORT);
-                toast.show();
+                Account loginAccount = requestLogin();
+
             }
         });
     }
@@ -73,6 +71,26 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Call<Account> call, Throwable t){
                 System.out.println(t.toString());
                 Toast.makeText(mContext, "no Account id=0", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return null;
+    }
+    protected Account requestLogin(){
+        mApiService.loginRequest(username.getText().toString(), password.getText().toString()).enqueue(new Callback<Account>() {
+            @Override
+            public void onResponse(Call<Account> call, Response<Account> response) {
+                if(response.isSuccessful()){
+                    MainActivity.loginAccount = response.body();
+                    Toast.makeText(mContext, "Login Successful!", Toast.LENGTH_SHORT).show();
+                    Intent move = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(move);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Account> call, Throwable t) {
+                System.out.println(t.toString());
+                Toast.makeText(mContext, "Login Failed!", Toast.LENGTH_SHORT).show();
             }
         });
         return null;

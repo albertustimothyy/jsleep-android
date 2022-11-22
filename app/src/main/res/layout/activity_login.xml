@@ -60,6 +60,7 @@
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:shadowColor="#BCCBD3"
+        android:textColor="#FFFFFF"
         android:textColorHint="#959595"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
