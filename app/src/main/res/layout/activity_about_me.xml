@@ -1,157 +1,414 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000033"
-    tools:context=".AboutMeActivity">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/AboutMeDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:text="Account Details"
-        android:textColor="#EFEFEF"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/AboutMeDetail"
-        tools:layout_editor_absoluteX="0dp">
+        android:layout_height="match_parent"
+        android:background="#000033"
+        tools:context=".AboutMeActivity">
 
-        <TextView
-            android:id="@+id/AboutMeName"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/AboutMePrimaryLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="56dp"
-            android:text="Name"
-            android:textColor="#EFEFEF"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="56dp"
-            tools:layout_editor_absoluteY="157dp" />
+            android:layout_marginTop="64dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="16dp">
 
-        <TextView
-            android:id="@+id/AboutMeInputName"
-            android:layout_width="240dp"
+
+            <LinearLayout
+                android:id="@+id/AboutMeDetailLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/AboutMeDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Account Details"
+                    android:textColor="#EFEFEF"
+                    android:textSize="34sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/AboutMeNameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/AboutMeDetail"
+                tools:layout_editor_absoluteX="0dp">
+
+                <TextView
+                    android:id="@+id/AboutMeName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:text="Name"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="157dp" />
+
+                <TextView
+                    android:id="@+id/AboutMeInputName"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="56dp"
+                    android:gravity="right"
+                    android:text="Albertus"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="296dp"
+                    tools:layout_editor_absoluteY="157dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/AboutMeEmailLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/AboutMeNameLayout"
+                tools:layout_editor_absoluteX="16dp">
+
+                <TextView
+                    android:id="@+id/AboutMeEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:text="Email"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="208dp" />
+
+                <TextView
+                    android:id="@+id/aboutMeInputEmail"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="56dp"
+                    android:gravity="right"
+                    android:text="albertus@ui.ac.id"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="219dp"
+                    tools:layout_editor_absoluteY="208dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/AboutMeBalanceLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/AboutMeEmailLayout"
+                tools:layout_editor_absoluteX="0dp">
+
+                <TextView
+                    android:id="@+id/AboutMeBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:text="Balance"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="259dp" />
+
+                <TextView
+                    android:id="@+id/aboutMeInputBalance"
+                    android:layout_width="219dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="56dp"
+                    android:gravity="right"
+                    android:text="0.0"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="343dp"
+                    tools:layout_editor_absoluteY="259dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/TopUpLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/AboutMeBalanceLayout"
+                tools:layout_editor_absoluteX="0dp">
+
+                <EditText
+                    android:id="@+id/AboutMeAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#57687A"
+                    android:ems="10"
+                    android:hint="Amount"
+                    android:inputType="number"
+                    android:textColor="#EFEFEF"
+                    android:textColorHint="#959595"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="50dp"
+                    tools:layout_editor_absoluteY="302dp" />
+
+                <Button
+                    android:id="@+id/AboutMeTopUpButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Top Up"
+                    tools:layout_editor_absoluteX="286dp"
+                    tools:layout_editor_absoluteY="302dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/AboutMeRegisterRenterButtonLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="56dp"
-            android:gravity="right"
-            android:text="Albertus"
-            android:textColor="#EFEFEF"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="296dp"
-            tools:layout_editor_absoluteY="157dp" />
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/AboutMePrimaryLayout"
+            tools:layout_editor_absoluteX="0dp">
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/AboutMeRegisterRenterButton"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:text="Register Renter"
+                android:textColorHint="#959595"
+                tools:layout_editor_absoluteX="165dp"
+                tools:layout_editor_absoluteY="410dp" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        tools:layout_editor_absoluteX="16dp">
 
-        <TextView
-            android:id="@+id/AboutMeEmail"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/AboutMeRegisterRenterLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="56dp"
-            android:text="Email"
-            android:textColor="#EFEFEF"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="56dp"
-            tools:layout_editor_absoluteY="208dp" />
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/AboutMePrimaryLayout"
+            tools:layout_editor_absoluteX="0dp">
 
-        <TextView
-            android:id="@+id/aboutMeInputEmail"
-            android:layout_width="240dp"
+            <LinearLayout
+                android:id="@+id/RegisterRenterNameInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/AboutMePrimaryLayout"
+                tools:layout_editor_absoluteX="0dp">
+
+                <EditText
+                    android:id="@+id/RegisterRenterNameInput"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#57687A"
+                    android:ems="10"
+                    android:hint="Name"
+                    android:inputType="textPersonName"
+                    android:textColor="#EFEFEF"
+                    android:textColorHint="#959595"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="99dp"
+                    tools:layout_editor_absoluteY="477dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/RegisterRenterAddressInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/RegisterRenterNameInputLayout"
+                tools:layout_editor_absoluteX="0dp">
+
+                <EditText
+                    android:id="@+id/RegisterRenterAddressInput"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#57687A"
+                    android:ems="10"
+                    android:hint="Address"
+                    android:inputType="textPersonName"
+                    android:textColor="#EFEFEF"
+                    android:textColorHint="#959595"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="99dp"
+                    tools:layout_editor_absoluteY="552dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/RegisterRenterPhoneInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/RegisterRenterAddressInputLayout"
+                tools:layout_editor_absoluteX="0dp">
+
+                <EditText
+                    android:id="@+id/RegisterRenterPhoneInput"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#57687A"
+                    android:ems="10"
+                    android:hint="Phone Number"
+                    android:inputType="number"
+                    android:textColor="#EFEFEF"
+                    android:textColorHint="#959595"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="99dp"
+                    tools:layout_editor_absoluteY="617dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/RegisterRenterButtonRegisterCancelLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/RegisterRenterPhoneInput"
+                tools:layout_editor_absoluteX="0dp">
+
+                <Button
+                    android:id="@+id/RegisterRenterRegisterButton"
+                    android:layout_width="144dp"
+                    android:layout_height="wrap_content"
+                    android:text="Register" />
+
+                <Button
+                    android:id="@+id/RegisterRenterCancelButton"
+                    android:layout_width="144dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="42dp"
+                    android:text="Cancel" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/AboutMeSecondaryLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="56dp"
-            android:gravity="right"
-            android:text="albertus@ui.ac.id"
-            android:textColor="#EFEFEF"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="219dp"
-            tools:layout_editor_absoluteY="208dp" />
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/AboutMePrimaryLayout"
+            tools:layout_editor_absoluteX="0dp">
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/RegisterRenterNameDataLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                tools:layout_editor_absoluteX="0dp">
 
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        tools:layout_editor_absoluteX="0dp">
+                <TextView
+                    android:id="@+id/RegisterRenterName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:text="Name"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="157dp" />
 
-        <TextView
-            android:id="@+id/AboutMeBalance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="56dp"
-            android:text="Balance"
-            android:textColor="#EFEFEF"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="56dp"
-            tools:layout_editor_absoluteY="259dp" />
+                <TextView
+                    android:id="@+id/RegisterRenterNameData"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="56dp"
+                    android:gravity="right"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="296dp"
+                    tools:layout_editor_absoluteY="157dp" />
 
-        <TextView
-            android:id="@+id/aboutMeInputBalance"
-            android:layout_width="219dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="56dp"
-            android:gravity="right"
-            android:text="0.0"
-            android:textColor="#EFEFEF"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="343dp"
-            tools:layout_editor_absoluteY="259dp" />
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/RegisterRenterAddressDataLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/AboutMeNameLayout"
+                tools:layout_editor_absoluteX="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        tools:layout_editor_absoluteX="0dp">
+                <TextView
+                    android:id="@+id/RegisterRenterAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:text="Address"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="208dp" />
 
-        <EditText
-            android:id="@+id/AboutMeAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#57687A"
-            android:ems="10"
-            android:hint="Amount"
-            android:inputType="number"
-            android:textColor="#EFEFEF"
-            android:textColorHint="#959595"
-            android:textSize="20sp"
-            tools:layout_editor_absoluteX="50dp"
-            tools:layout_editor_absoluteY="302dp" />
+                <TextView
+                    android:id="@+id/RegisterRenterAddressData"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="56dp"
+                    android:gravity="right"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="219dp"
+                    tools:layout_editor_absoluteY="208dp" />
 
-        <Button
-            android:id="@+id/AboutMeTopUpButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Top Up"
-            tools:layout_editor_absoluteX="286dp"
-            tools:layout_editor_absoluteY="302dp" />
-    </LinearLayout>
+            </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/RegisterRenterPhoneDataLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/AboutMeEmailLayout"
+                tools:layout_editor_absoluteX="0dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/RegisterRenterPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:text="Phone Number"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="259dp" />
+
+                <TextView
+                    android:id="@+id/RegisterRenterPhoneData"
+                    android:layout_width="162dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="56dp"
+                    android:gravity="right"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="343dp"
+                    tools:layout_editor_absoluteY="259dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
