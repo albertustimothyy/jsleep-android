@@ -5,7 +5,7 @@ public enum Facility {
     Balcony,
     FitnessCenter,
     Refrigerator,
-    Wifi,
+    WiFi,
     Restaurant,
     Bathtub,
     AC

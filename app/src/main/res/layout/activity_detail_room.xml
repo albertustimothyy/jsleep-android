@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000033"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000033"
+        tools:context=".DetailRoomActivity">
+
+        <LinearLayout
+            android:id="@+id/DetailRoomPrimaryLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="16dp">
+
+
+            <LinearLayout
+                android:id="@+id/DetailRoomLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/DetailRoom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Detail Room"
+                    android:textColor="#EFEFEF"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/DetailRoomNameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/AboutMeDetail"
+                tools:layout_editor_absoluteX="0dp">
+
+                <TextView
+                    android:id="@+id/DetailRoomName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:text="Name"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="157dp" />
+
+                <TextView
+                    android:id="@+id/DetailRoomNameInput"
+                    android:layout_width="270dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="56dp"
+                    android:gravity="right"
+                    android:text="Sheraton"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="296dp"
+                    tools:layout_editor_absoluteY="157dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/DetailRoomBedTypeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/DetailRoomNameLayout"
+                tools:layout_editor_absoluteX="16dp">
+
+                <TextView
+                    android:id="@+id/DetailRoomBedType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:text="Bed Type"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="208dp" />
+
+                <TextView
+                    android:id="@+id/DetailRoomBedTypeInput"
+                    android:layout_width="243dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="56dp"
+                    android:gravity="right"
+                    android:text="King"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="219dp"
+                    tools:layout_editor_absoluteY="208dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/DetailRoomSizeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/AboutMeEmailLayout"
+                tools:layout_editor_absoluteX="0dp">
+
+                <TextView
+                    android:id="@+id/DetailRoomSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:text="Size"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="259dp" />
+
+                <TextView
+                    android:id="@+id/DetailRoomSizeInput"
+                    android:layout_width="290dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="56dp"
+                    android:gravity="right"
+                    android:text="20"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="343dp"
+                    tools:layout_editor_absoluteY="259dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/DetailRoomPriceLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/AboutMeEmailLayout"
+                tools:layout_editor_absoluteX="0dp">
+
+                <TextView
+                    android:id="@+id/DetailRoomPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:text="Price"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="259dp" />
+
+                <TextView
+                    android:id="@+id/DetailRoomPriceInput"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="56dp"
+                    android:gravity="right"
+                    android:text="20000000"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="343dp"
+                    tools:layout_editor_absoluteY="259dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/DetailRoomAddressLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/AboutMeEmailLayout"
+                tools:layout_editor_absoluteX="0dp">
+
+                <TextView
+                    android:id="@+id/DetailRoomAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:text="Address"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="259dp" />
+
+                <TextView
+                    android:id="@+id/DetailRoomAddressInput"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="55dp"
+                    android:layout_marginRight="56dp"
+                    android:gravity="right"
+                    android:text="Test"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="343dp"
+                    tools:layout_editor_absoluteY="259dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/DetailRoomCityLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/AboutMeEmailLayout"
+                tools:layout_editor_absoluteX="0dp">
+
+                <TextView
+                    android:id="@+id/DetailRoomCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:text="City"
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="259dp" />
+
+                <TextView
+                    android:id="@+id/DetailRoomCityInput"
+                    android:layout_width="290dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="56dp"
+                    android:gravity="right"
+                    android:text=""
+                    android:textColor="#EFEFEF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="343dp"
+                    tools:layout_editor_absoluteY="259dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/DetailRoomFacilityLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="42dp"
+                android:layout_marginTop="32dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/DetailRoomFacilityData"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    app:layout_constraintTop_toBottomOf="@+id/AboutMeEmailLayout"
+                    tools:layout_editor_absoluteX="0dp">
+
+                    <TextView
+                        android:id="@+id/DetailRoomFacility"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Facility"
+                        android:textColor="#EFEFEF"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:layout_editor_absoluteX="56dp"
+                        tools:layout_editor_absoluteY="259dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/CheckBox1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/DetailRoomCheckBoxAC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:enabled="false"
+                        android:text="AC"
+                        android:textColor="#EFEFEF"
+                        android:textSize="18sp" />
+
+                    <CheckBox
+                        android:id="@+id/DetailRoomCheckBoxRefrigerator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:enabled="false"
+                        android:text="Refrigerator"
+                        android:textColor="#EFEFEF"
+                        android:textSize="18sp" />
+
+                    <CheckBox
+                        android:id="@+id/DetailRoomCheckBoxWifi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:enabled="false"
+                        android:text="WiFi"
+                        android:textColor="#EFEFEF"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/CheckBox2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/DetailRoomCheckBoxBathub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:enabled="false"
+                        android:text="Bathub"
+                        android:textColor="#EFEFEF"
+                        android:textSize="18sp" />
+
+                    <CheckBox
+                        android:id="@+id/DetailRoomCheckBoxBalcony"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:enabled="false"
+                        android:text="Balcony"
+                        android:textColor="#EFEFEF"
+                        android:textSize="18sp" />
+
+                    <CheckBox
+                        android:id="@+id/DetailRoomCheckBoxRestaurant"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:enabled="false"
+                        android:text="Restaurant"
+                        android:textColor="#EFEFEF"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/DetailRoomCheckBox3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/DetailRoomCheckBoxSwimmingPool"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:enabled="false"
+                        android:text="Swimming Pool"
+                        android:textColor="#EFEFEF"
+                        android:textSize="18sp" />
+
+                    <CheckBox
+                        android:id="@+id/DetailRoomCheckBoxFitnessCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="false"
+                        android:enabled="false"
+                        android:text="Fitness Center"
+                        android:textColor="#EFEFEF"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/DetailRoomMakeBooking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:gravity="center"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/DetailRoomPrimaryLayout"
+            tools:layout_editor_absoluteX="0dp">
+
+            <Button
+                android:id="@+id/DetailRoomMakeBookingButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="make booking"
+                android:textColorHint="#959595" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/DetailRoomBookingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_constraintTop_toBottomOf="@+id/DetailRoomPrimaryLayout"
+            tools:layout_editor_absoluteX="0dp">
+
+            <LinearLayout
+                android:id="@+id/DetailRoomBookingFromLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/AboutMePrimaryLayout"
+                tools:layout_editor_absoluteX="0dp">
+
+                <EditText
+                    android:id="@+id/DetailRoomBookingFromInput"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#57687A"
+                    android:ems="10"
+                    android:hint="Date From"
+                    android:inputType="textPersonName"
+                    android:textColor="#EFEFEF"
+                    android:textColorHint="#959595"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="99dp"
+                    tools:layout_editor_absoluteY="477dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/DetailRoomBookingToLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/RegisterRenterNameInputLayout"
+                tools:layout_editor_absoluteX="0dp">
+
+                <EditText
+                    android:id="@+id/DetailRoomBookingToInput"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#57687A"
+                    android:ems="10"
+                    android:hint="Date To"
+                    android:inputType="textPersonName"
+                    android:textColor="#EFEFEF"
+                    android:textColorHint="#959595"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="99dp"
+                    tools:layout_editor_absoluteY="552dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/DetailRoomBookButtonLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/RegisterRenterPhoneInput"
+                tools:layout_editor_absoluteX="0dp">
+
+                <Button
+                    android:id="@+id/DetailRoomBookButton"
+                    android:layout_width="144dp"
+                    android:layout_height="wrap_content"
+                    android:text="Book" />
+
+                <Button
+                    android:id="@+id/DetailRoomCancelButton"
+                    android:layout_width="144dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="42dp"
+                    android:text="Cancel" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

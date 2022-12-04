@@ -8,10 +8,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -24,6 +27,7 @@ import java.util.List;
 import com.google.gson.Gson;
 
 import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.Account;
+import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.Payment;
 import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.Room;
 import AlbertusTimothyGunawanJSleepKM.jsleep_android.request.BaseApiService;
 import AlbertusTimothyGunawanJSleepKM.jsleep_android.request.UtilsApi;
@@ -32,13 +36,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    public static Account loginAccount, registerAccount;
+    public static Account loginAccount;
     public static List<Room> getRoom;
+    public static Payment payment;
+    public static Room room;
+    public static int roomPosition;
     BaseApiService mApiService;
     Context mContext;
     EditText page;
     ListView data;
     Button prev, next, go;
+    int curPage = 1, pageSize = 10;
+    MenuItem addBox;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,43 +62,65 @@ public class MainActivity extends AppCompatActivity {
         prev = findViewById(R.id.MainPrevButton);
         next = findViewById(R.id.MainNextButton);
         go = findViewById(R.id.MainGoButton);
-        getAllRoom(0);
+
+        getAllRoom();
+
+        pageButtonResponses();
+
+        data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                roomPosition = i + ((curPage - 1) * pageSize);
+                Intent move = new Intent(MainActivity.this, DetailRoomActivity.class);
+                startActivity(move);
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater inflater = getMenuInflater();
-
         getMenuInflater().inflate(R.menu.top_menu, menu);
+        addBox = menu.findItem(R.id.add_box_button);
+        if(loginAccount.renter == null) {
+            addBox.setVisible(false);
+        }
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.person_button:
-                Intent intent = new Intent(MainActivity.this, AboutMeActivity.class);
-                startActivity(intent);
-                Toast toast = Toast.makeText(getApplicationContext(), "Account Details", Toast.LENGTH_SHORT);
-                toast.show();
+                Intent aboutMe = new Intent(MainActivity.this, AboutMeActivity.class);
+                startActivity(aboutMe);
+                Toast.makeText(getApplicationContext(), "Account Details", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.add_box_button:
-                Intent intent2 = new Intent(MainActivity.this, CreateRoomActivity.class);
-                startActivity(intent2);
-                Toast toast2 = Toast.makeText(getApplicationContext(), "Account Details", Toast.LENGTH_SHORT);
-                toast2.show();
+                Intent createRoom = new Intent(MainActivity.this, CreateRoomActivity.class);
+                startActivity(createRoom);
+                Toast.makeText(getApplicationContext(), "Create Room", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.Logout_Button:
+                Intent logout = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(logout);
+                Toast.makeText(getApplicationContext(), "Logout Successful!", Toast.LENGTH_SHORT).show();
+                break;
         }
         return true;
     }
-    protected void getAllRoom(int page) {
+
+    protected void getAllRoom() {
         mApiService.getAllRoom (
-                page,
-                10
-        ).enqueue(new Callback<List<Room>>() {
+                curPage - 1,
+                pageSize
+        ).enqueue(new Callback<ArrayList<Room>>() {
             @Override
-            public void onResponse(Call<List<Room>> call, Response<List<Room>> response) {
+            public void onResponse(Call<ArrayList<Room>> call, Response<ArrayList<Room>> response) {
                 if(response.isSuccessful()){
                     getRoom = (ArrayList<Room>) response.body();
                     ArrayList<String> list = new ArrayList<>();
+
                     assert getRoom != null;
                     for (Room room : getRoom){
                         list.add(room.name);
@@ -100,9 +132,31 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Room>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Room>> call, Throwable t) {
                 System.out.println(t.toString());
             }
         });
     }
+
+    protected void pageButtonResponses() {
+        prev.setOnClickListener(view -> {
+            if(curPage > 1) {
+                curPage--;
+                getAllRoom();
+                page.setText(String.valueOf(curPage));
+            }
+        });
+        next.setOnClickListener(view -> {
+            curPage++;
+            getAllRoom();
+            page.setText(String.valueOf(curPage));
+        });
+        go.setOnClickListener(view -> {
+            if(curPage >= 1) {
+                curPage = Integer.parseInt(page.getText().toString());
+                getAllRoom();
+            }
+        });
+    }
+
 }

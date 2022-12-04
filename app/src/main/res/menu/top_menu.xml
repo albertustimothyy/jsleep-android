@@ -14,4 +14,8 @@
         android:icon="@drawable/ic_baseline_add_box_24"
         android:title="Add Box Button"
         app:showAsAction="collapseActionView|always"/>
+    <item android:id="@+id/Logout_Button"
+        android:icon="@drawable/ic_baseline_logout_24"
+        android:title="Logout Button"
+        app:showAsAction="collapseActionView|always"/>
 </menu>

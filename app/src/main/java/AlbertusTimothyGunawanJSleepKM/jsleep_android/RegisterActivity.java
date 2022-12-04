@@ -50,9 +50,9 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Account> call, Response<Account> response) {
                 if(response.isSuccessful()){
-                    MainActivity.registerAccount = response.body();
+                    MainActivity.loginAccount = response.body();
                     Toast.makeText(mContext, "Register Successful!", Toast.LENGTH_SHORT).show();
-                    Intent move = new Intent(RegisterActivity.this, MainActivity.class);
+                    Intent move = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(move);
                 }
             }

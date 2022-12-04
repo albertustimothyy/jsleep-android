@@ -19,8 +19,15 @@
             android:layout_marginTop="64dp"
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="16dp">
+            tools:layout_editor_absoluteX="16dp"
+            >
 
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@drawable/ic_baseline_account_circle_24" />
 
             <LinearLayout
                 android:id="@+id/AboutMeDetailLayout"
@@ -35,7 +42,8 @@
                     android:gravity="center"
                     android:text="Account Details"
                     android:textColor="#EFEFEF"
-                    android:textSize="34sp" />
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
 
@@ -56,6 +64,7 @@
                     android:text="Name"
                     android:textColor="#EFEFEF"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     tools:layout_editor_absoluteX="56dp"
                     tools:layout_editor_absoluteY="157dp" />
 
@@ -90,6 +99,7 @@
                     android:text="Email"
                     android:textColor="#EFEFEF"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     tools:layout_editor_absoluteX="56dp"
                     tools:layout_editor_absoluteY="208dp" />
 
@@ -124,6 +134,7 @@
                     android:text="Balance"
                     android:textColor="#EFEFEF"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     tools:layout_editor_absoluteX="56dp"
                     tools:layout_editor_absoluteY="259dp" />
 
@@ -203,7 +214,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@+id/AboutMePrimaryLayout"
             tools:layout_editor_absoluteX="0dp">
 
@@ -327,6 +338,7 @@
                     android:text="Name"
                     android:textColor="#EFEFEF"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     tools:layout_editor_absoluteX="56dp"
                     tools:layout_editor_absoluteY="157dp" />
 
@@ -360,6 +372,7 @@
                     android:text="Address"
                     android:textColor="#EFEFEF"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     tools:layout_editor_absoluteX="56dp"
                     tools:layout_editor_absoluteY="208dp" />
 
@@ -393,6 +406,7 @@
                     android:text="Phone Number"
                     android:textColor="#EFEFEF"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     tools:layout_editor_absoluteX="56dp"
                     tools:layout_editor_absoluteY="259dp" />
 
@@ -407,6 +421,23 @@
                     tools:layout_editor_absoluteX="343dp"
                     tools:layout_editor_absoluteY="259dp" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/RegisterRenterBackToMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/AboutMeEmailLayout"
+                tools:layout_editor_absoluteX="0dp">
+
+                <Button
+                    android:id="@+id/RegisterRenterBackToMainButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="back to main menu"
+                    android:textColorHint="#959595" />
             </LinearLayout>
         </LinearLayout>
 

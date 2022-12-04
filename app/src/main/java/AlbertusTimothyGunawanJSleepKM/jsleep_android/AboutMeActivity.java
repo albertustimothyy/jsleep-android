@@ -26,40 +26,58 @@ public class AboutMeActivity extends AppCompatActivity {
     BaseApiService mApiService;
     TextView name, email, balance, usernameData, addressData, phoneNumberData;
     LinearLayout renterButtonLayout, registerLayout, dataLayout;
-    EditText username, address, phoneNumber;
-    Button renterButton, registerButton, cancelButton;
+    EditText username, address, phoneNumber, topUpBalance;
+    Button renterButton, registerButton, cancelButton, backToMenu, topUpButton;
     Context mContext;
-    Handler mHandler;
+    Boolean topUp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_me);
+
         mApiService = UtilsApi.getApiService();
         mContext = this;
-
 
         name = findViewById(R.id.AboutMeInputName);
         email = findViewById(R.id.aboutMeInputEmail);
         balance = findViewById(R.id.aboutMeInputBalance);
-        renterButtonLayout = (LinearLayout) findViewById(R.id.AboutMeRegisterRenterButtonLayout);
-        registerLayout = (LinearLayout) findViewById(R.id.AboutMeRegisterRenterLayout);
-        dataLayout = (LinearLayout) findViewById(R.id.AboutMeSecondaryLayout);
-        renterButton = findViewById(R.id.AboutMeRegisterRenterButton);
-        registerButton =  findViewById(R.id.RegisterRenterRegisterButton);
-        cancelButton =  findViewById(R.id.RegisterRenterCancelButton);
         usernameData = findViewById(R.id.RegisterRenterNameData);
         addressData = findViewById(R.id.RegisterRenterAddressData);
         phoneNumberData = findViewById(R.id.RegisterRenterPhoneData);
+
+        renterButtonLayout = (LinearLayout) findViewById(R.id.AboutMeRegisterRenterButtonLayout);
+        registerLayout = (LinearLayout) findViewById(R.id.AboutMeRegisterRenterLayout);
+        dataLayout = (LinearLayout) findViewById(R.id.AboutMeSecondaryLayout);
+
         username = findViewById(R.id.RegisterRenterNameInput);
         address = findViewById(R.id.RegisterRenterAddressInput);
         phoneNumber = findViewById(R.id.RegisterRenterPhoneInput);
+        topUpBalance = findViewById(R.id.AboutMeAmount);
+
+        renterButton = findViewById(R.id.AboutMeRegisterRenterButton);
+        registerButton =  findViewById(R.id.RegisterRenterRegisterButton);
+        cancelButton =  findViewById(R.id.RegisterRenterCancelButton);
+        backToMenu = findViewById(R.id.RegisterRenterBackToMainButton);
+        topUpButton = findViewById(R.id.AboutMeTopUpButton);
 
         name.setText(MainActivity.loginAccount.name);
         email.setText(MainActivity.loginAccount.email);
         balance.setText(String.valueOf(MainActivity.loginAccount.balance));
+
+        topUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                topUpAccount();
+            }
+        });
+
         if (MainActivity.loginAccount.renter == null) {
             renterButtonLayout.setVisibility(LinearLayout.VISIBLE);
+            dataLayout.setVisibility(LinearLayout.INVISIBLE);
+            registerLayout.setVisibility(LinearLayout.INVISIBLE);
+
             renterButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -68,14 +86,13 @@ public class AboutMeActivity extends AppCompatActivity {
                     registerLayout.setVisibility(LinearLayout.VISIBLE);
                     dataLayout.setVisibility(LinearLayout.INVISIBLE);
 
-
                     registerButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             Account registerRenterAccount = requestRenter();
-
                         }
                     });
+
                     cancelButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -87,6 +104,7 @@ public class AboutMeActivity extends AppCompatActivity {
                 }
             });
         }
+
         if (MainActivity.loginAccount.renter != null) {
             registerLayout.setVisibility(LinearLayout.INVISIBLE);
             renterButtonLayout.setVisibility(LinearLayout.INVISIBLE);
@@ -95,6 +113,15 @@ public class AboutMeActivity extends AppCompatActivity {
             usernameData.setText(MainActivity.loginAccount.renter.username);
             addressData.setText(MainActivity.loginAccount.renter.address);
             phoneNumberData.setText(String.valueOf(MainActivity.loginAccount.renter.phoneNumber));
+
+            backToMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(mContext, "Main Menu Page", Toast.LENGTH_SHORT).show();
+                    Intent move = new Intent(AboutMeActivity.this, MainActivity.class);
+                    startActivity(move);
+                }
+            });
         }
     }
     protected Account requestRenter() {
@@ -109,6 +136,7 @@ public class AboutMeActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     MainActivity.loginAccount.renter = response.body();
                     Toast.makeText(mContext, "Register Renter Successful!", Toast.LENGTH_SHORT).show();
+
                     registerLayout.setVisibility(LinearLayout.INVISIBLE);
                     renterButtonLayout.setVisibility(LinearLayout.INVISIBLE);
                     dataLayout.setVisibility(LinearLayout.VISIBLE);
@@ -116,6 +144,14 @@ public class AboutMeActivity extends AppCompatActivity {
                     usernameData.setText(MainActivity.loginAccount.renter.username);
                     addressData.setText(MainActivity.loginAccount.renter.address);
                     phoneNumberData.setText(String.valueOf(MainActivity.loginAccount.renter.phoneNumber));
+                    backToMenu.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(mContext, "Main Menu Page", Toast.LENGTH_SHORT).show();
+                            Intent move = new Intent(AboutMeActivity.this, MainActivity.class);
+                            startActivity(move);
+                        }
+                    });
                 }
             }
 
@@ -126,6 +162,29 @@ public class AboutMeActivity extends AppCompatActivity {
             }
         });
         return null;
+    }
+
+    protected void topUpAccount() {
+        mApiService.topUpRequest(
+                MainActivity.loginAccount.id,
+                Double.parseDouble(topUpBalance.getText().toString())
+        ).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                System.out.println(response.code());
+                if (response.isSuccessful()) {
+                    topUp = response.body();
+                    Toast.makeText(mContext, "Top Up Successful!", Toast.LENGTH_SHORT).show();
+                    balance.setText(String.valueOf(MainActivity.loginAccount.balance + Double.parseDouble(topUpBalance.getText().toString())));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                System.out.println(t.toString());
+                Toast.makeText(mContext, "Top Up Failed!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

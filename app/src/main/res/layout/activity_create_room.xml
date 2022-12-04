@@ -46,7 +46,7 @@
                 tools:layout_editor_absoluteX="0dp">
 
                 <EditText
-                    android:id="@+id/RegisterRenterNameInput"
+                    android:id="@+id/CreateRoomNameInput"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#57687A"
@@ -118,7 +118,7 @@
                 tools:layout_editor_absoluteX="0dp">
 
                 <EditText
-                    android:id="@+id/CreateSizePriceInput"
+                    android:id="@+id/CreateRoomSizeInput"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#57687A"
@@ -288,17 +288,16 @@
                     tools:layout_editor_absoluteX="56dp"
                     tools:layout_editor_absoluteY="157dp" />
 
-                <TextView
-                    android:id="@+id/AboutMeInputName"
+
+                <Spinner
+                    android:id="@+id/CreateFacilityCitySpinner"
                     android:layout_width="240dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="90dp"
                     android:layout_marginRight="56dp"
-                    android:gravity="right"
-                    android:text="Albertus"
-                    android:textColor="#EFEFEF"
+                    android:layout_weight="1"
                     android:textSize="20sp"
-                    tools:layout_editor_absoluteX="296dp"
-                    tools:layout_editor_absoluteY="157dp" />
+                    android:backgroundTint="@color/white"/>
 
             </LinearLayout>
 
@@ -321,23 +320,23 @@
                     tools:layout_editor_absoluteX="56dp"
                     tools:layout_editor_absoluteY="208dp" />
 
-                <TextView
-                    android:id="@+id/aboutMeInputEmail"
+                <Spinner
+                    android:id="@+id/CreateFacilityBedTypeSpinner"
                     android:layout_width="240dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_marginRight="56dp"
+                    android:layout_marginLeft="41dp"
                     android:gravity="right"
-                    android:text="albertus@ui.ac.id"
                     android:textColor="#EFEFEF"
                     android:textSize="20sp"
-                    tools:layout_editor_absoluteX="219dp"
-                    tools:layout_editor_absoluteY="208dp" />
+                    android:backgroundTint="@color/white"/>
             </LinearLayout>
 
 
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/CreateRoomButton"
+            android:id="@+id/CreateRoomButtonLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
