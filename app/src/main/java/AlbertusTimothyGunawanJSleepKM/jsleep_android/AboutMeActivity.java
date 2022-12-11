@@ -27,7 +27,7 @@ public class AboutMeActivity extends AppCompatActivity {
     TextView name, email, balance, usernameData, addressData, phoneNumberData;
     LinearLayout renterButtonLayout, registerLayout, dataLayout;
     EditText username, address, phoneNumber, topUpBalance;
-    Button renterButton, registerButton, cancelButton, backToMenu, topUpButton;
+    Button renterButton, registerButton, cancelButton, backToMenu, topUpButton, historyButton;
     Context mContext;
     Boolean topUp;
 
@@ -61,6 +61,7 @@ public class AboutMeActivity extends AppCompatActivity {
         cancelButton =  findViewById(R.id.RegisterRenterCancelButton);
         backToMenu = findViewById(R.id.RegisterRenterBackToMainButton);
         topUpButton = findViewById(R.id.AboutMeTopUpButton);
+        historyButton = findViewById(R.id.RegisterRenterPaymentListButton);
 
         name.setText(MainActivity.loginAccount.name);
         email.setText(MainActivity.loginAccount.email);
@@ -114,6 +115,14 @@ public class AboutMeActivity extends AppCompatActivity {
             addressData.setText(MainActivity.loginAccount.renter.address);
             phoneNumberData.setText(String.valueOf(MainActivity.loginAccount.renter.phoneNumber));
 
+            historyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(mContext, "Booking History", Toast.LENGTH_SHORT).show();
+                    Intent move = new Intent(AboutMeActivity.this, RenterBookingHistoryActivity.class);
+                    startActivity(move);
+                }
+            });
             backToMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -175,7 +184,8 @@ public class AboutMeActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     topUp = response.body();
                     Toast.makeText(mContext, "Top Up Successful!", Toast.LENGTH_SHORT).show();
-                    balance.setText(String.valueOf(MainActivity.loginAccount.balance + Double.parseDouble(topUpBalance.getText().toString())));
+                    MainActivity.loginAccount.balance += Double.parseDouble(topUpBalance.getText().toString());
+                    balance.setText(String.valueOf(MainActivity.loginAccount.balance));
                 }
             }
 
@@ -186,5 +196,4 @@ public class AboutMeActivity extends AppCompatActivity {
             }
         });
     }
-
 }

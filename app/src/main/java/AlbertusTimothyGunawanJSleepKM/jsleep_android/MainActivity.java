@@ -13,20 +13,24 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
+
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import com.google.gson.Gson;
 
 import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.Account;
+import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.City;
 import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.Payment;
 import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.Room;
 import AlbertusTimothyGunawanJSleepKM.jsleep_android.request.BaseApiService;
@@ -35,7 +39,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
     public static Account loginAccount;
     public static List<Room> getRoom;
     public static Payment payment;
@@ -43,11 +47,18 @@ public class MainActivity extends AppCompatActivity {
     public static int roomPosition;
     BaseApiService mApiService;
     Context mContext;
-    EditText page;
+    EditText page, priceFrom, priceTo;
     ListView data;
-    Button prev, next, go;
+    Spinner city;
+    Button prev, next, go, filterByCityButton, filterByPriceButton, cityFilterButton, priceFilterButton;
+    ImageView filterDown, filterUp;
+    LinearLayout filterByButtonLayout;
+    CardView filterByCity, filterByPrice;
     int curPage = 1, pageSize = 10;
-    MenuItem addBox;
+    MenuItem addBox, search;
+    SearchView searchView;
+    ArrayAdapter<String> adapter;
+    ArrayAdapter adapterCity;
 
 
     @Override
@@ -58,23 +69,103 @@ public class MainActivity extends AppCompatActivity {
         mContext = this;
 
         page = findViewById(R.id.MainPage);
+        priceFrom = findViewById(R.id.FilterByPriceInputFrom);
+        priceTo = findViewById(R.id.FilterByPriceInputTo);
+
         data = findViewById(R.id.MainListView);
         prev = findViewById(R.id.MainPrevButton);
         next = findViewById(R.id.MainNextButton);
         go = findViewById(R.id.MainGoButton);
+        filterByPriceButton = findViewById(R.id.FilterByPriceButton);
+        filterByCityButton = findViewById(R.id.FilterByCityButton);
+        cityFilterButton = findViewById(R.id.FilterByCitySubmitButton);
+        priceFilterButton = findViewById(R.id.FilterByPriceSubmitButton);
+
+        filterDown = findViewById(R.id.MainToFilterByImg);
+        filterUp = findViewById(R.id.FilterToMainByImg);
+
+        filterByButtonLayout = findViewById(R.id.FilterByButtonLayout);
+
+        filterByCity = findViewById(R.id.FilterByCityCardViewLayout);
+        filterByPrice = findViewById(R.id.FilterByPriceCardViewLayout);
+
+        city = findViewById(R.id.FilterByCityInput);
+
+        adapterCity = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, City.values());
+        adapterCity.setDropDownViewResource(R.layout.dropdown_item);
+        city.setAdapter(adapterCity);
 
         getAllRoom();
 
         pageButtonResponses();
 
-        data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        filterDown.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                roomPosition = i + ((curPage - 1) * pageSize);
-                Intent move = new Intent(MainActivity.this, DetailRoomActivity.class);
-                startActivity(move);
+            public void onClick(View view) {
+                filterByButtonLayout.setVisibility(LinearLayout.VISIBLE);
+                filterUp.setVisibility(ImageView.VISIBLE);
+                filterDown.setVisibility(ImageView.GONE);
+                filterByPriceButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        filterByPrice.setVisibility(CardView.VISIBLE);
+                        filterByButtonLayout.setVisibility(LinearLayout.GONE);
+                        priceFilterButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                getRoomByPrice();
+                            }
+                        });
+                    }
+                });
+                filterByCityButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        filterByCity.setVisibility(CardView.VISIBLE);
+                        filterByButtonLayout.setVisibility(LinearLayout.GONE);
+                        cityFilterButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                getRoomByCity();
+                            }
+                        });
+                    }
+                });
             }
         });
+
+        filterUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                filterByButtonLayout.setVisibility(LinearLayout.GONE);
+                filterByCity.setVisibility(CardView.GONE);
+                filterByPrice.setVisibility(CardView.GONE);
+                filterUp.setVisibility(ImageView.GONE);
+                filterDown.setVisibility(ImageView.VISIBLE);
+                getAllRoom();
+            }
+        });
+        if (loginAccount.renter != null) {
+            data.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    int j = 0;
+
+                    for (Room room : getRoom){
+                        if( room.name.equals(adapter.getItem(i)))
+                            break;
+                        j++;
+                    }
+
+                    roomPosition = j;
+                    System.out.println(roomPosition);
+
+                    Intent move = new Intent(MainActivity.this, DetailRoomActivity.class);
+                    startActivity(move);
+                }
+            });
+        }
+
     }
 
     @Override
@@ -82,6 +173,23 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         getMenuInflater().inflate(R.menu.top_menu, menu);
         addBox = menu.findItem(R.id.add_box_button);
+
+        search = menu.findItem(R.id.search_button);
+        searchView = (SearchView) search.getActionView();
+        searchView.setQueryHint("Search");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.getFilter().filter(s);
+                return false;
+            }
+        });
         if(loginAccount.renter == null) {
             addBox.setVisible(false);
         }
@@ -120,14 +228,65 @@ public class MainActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     getRoom = (ArrayList<Room>) response.body();
                     ArrayList<String> list = new ArrayList<>();
-
                     assert getRoom != null;
                     for (Room room : getRoom){
                         list.add(room.name);
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1, list);
+                    adapter = new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1, list);
                     data.setAdapter(adapter);
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Room>> call, Throwable t) {
+                System.out.println(t.toString());
+            }
+        });
+    }
+    protected void getRoomByCity() {
+        mApiService.getRoomByCity (
+                curPage - 1,
+                pageSize,
+                city.getSelectedItem().toString()
+        ).enqueue(new Callback<ArrayList<Room>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Room>> call, Response<ArrayList<Room>> response) {
+                if(response.isSuccessful()){
+                    getRoom = (ArrayList<Room>) response.body();
+                    ArrayList<String> list = new ArrayList<>();
+                    assert getRoom != null;
+                    for (Room room : getRoom){
+                        list.add(room.name);
+                    }
+                    adapter = new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1, list);
+                    data.setAdapter(adapter);
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ArrayList<Room>> call, Throwable t) {
+                System.out.println(t.toString());
+            }
+        });
+    }
+
+    protected void getRoomByPrice() {
+        mApiService.getRoomByPrice (
+                curPage - 1,
+                pageSize,
+                Double.parseDouble(priceFrom.getText().toString()),
+                Double.parseDouble(priceTo.getText().toString())
+        ).enqueue(new Callback<ArrayList<Room>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Room>> call, Response<ArrayList<Room>> response) {
+                if(response.isSuccessful()){
+                    getRoom = (ArrayList<Room>) response.body();
+                    ArrayList<String> list = new ArrayList<>();
+                    assert getRoom != null;
+                    for (Room room : getRoom){
+                        list.add(room.name);
+                    }
+                    adapter = new ArrayAdapter<>(mContext, android.R.layout.simple_list_item_1, list);
+                    data.setAdapter(adapter);
                 }
             }
 
@@ -158,5 +317,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 }

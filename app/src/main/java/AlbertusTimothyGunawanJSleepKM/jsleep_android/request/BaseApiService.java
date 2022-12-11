@@ -54,6 +54,21 @@ public interface BaseApiService {
             @Query("pageSize") int pageSize
     );
 
+    @GET("/room/filterByCity")
+    Call<ArrayList<Room>> getRoomByCity (
+            @Query("page") int page,
+            @Query("pageSize") int pageSize,
+            @Query("city") String city
+    );
+
+    @GET("/room/filterByPrice")
+    Call<ArrayList<Room>> getRoomByPrice (
+            @Query("page") int page,
+            @Query("pageSize") int pageSize,
+            @Query("minPrice") double minPrice,
+            @Query("maxPrice")double maxPrice
+    );
+
     @POST("/room/create")
     Call<Room> createRoomRequest (
             @Query("accountId") int accountId,
@@ -80,4 +95,9 @@ public interface BaseApiService {
 
     @POST("/payment/{id}/accept")
     Call<Boolean> acceptPaymentRequest (@Path("id") int id);
+
+    @GET("/payment/getPaymentFromRenter")
+    Call <List<Payment>> getPaymentFromRenter (
+            @Query("renterId") int renterId
+    );
 }

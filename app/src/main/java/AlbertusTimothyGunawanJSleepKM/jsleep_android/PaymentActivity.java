@@ -13,9 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.Invoice;
 import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.Payment;
 import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.Room;
 import AlbertusTimothyGunawanJSleepKM.jsleep_android.request.BaseApiService;
@@ -27,28 +30,30 @@ import retrofit2.Response;
 public class PaymentActivity extends AppCompatActivity {
     BaseApiService mApiService;
     Context mContext;
-    TextView roomName, dateFrom, dateTo, roomPrice, totalPrice, accountBalance, voucher;
-    Button acceptPayment, cancelPayment, topUpButton;
-    LinearLayout topUp;
+    TextView roomName, date, paymentStatus, totalPrice, accountBalance, voucher;
+    Button acceptPayment, cancelPayment, topUpButton, backToMainButton;
+    LinearLayout topUp, secondaryLayout, backToMain;
     EditText topUpBalance;
     ImageButton topUpDown, topUpUp;
-    private Room room;
+    Room room;
     Boolean paymentCheck, topUpCheck;
+    Payment payment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
 
-        room = MainActivity.getRoom.get(MainActivity.roomPosition);
+        payment = RenterBookingHistoryActivity.data.get(RenterBookingHistoryActivity.orderIndex);
+
+        room = MainActivity.getRoom.get(payment.roomId);
 
         mApiService = UtilsApi.getApiService();
         mContext = this;
 
         roomName = findViewById(R.id.PaymentDetailRoomNameInput);
-        dateFrom = findViewById(R.id.PaymentDetailDateFromInput);
-        dateTo = findViewById(R.id.PaymentDetailDateToInput);
-        roomPrice = findViewById(R.id.PaymentDetailRoomPriceInput);
+        date = findViewById(R.id.PaymentDetailDateInput);
+        paymentStatus = findViewById(R.id.PaymentDetailPaymentStatusInput);
         totalPrice = findViewById(R.id.PaymentDetailTotalPriceInput);
         accountBalance = findViewById(R.id.PaymentBalanceInput);
         voucher = findViewById(R.id.PaymentVoucher);
@@ -59,54 +64,69 @@ public class PaymentActivity extends AppCompatActivity {
 
         topUpDown = findViewById(R.id.PaymentBalanceDownImg);
         topUpUp = findViewById(R.id.PaymentBalanceUpImg);
+        backToMainButton = findViewById(R.id.PaymentBackToMainButton);
 
         topUp = findViewById(R.id.PaymentActivityTopUpLayout);
+        secondaryLayout = findViewById(R.id.PaymentSecondaryLayout);
+        backToMain = findViewById(R.id.PaymentBackToMain);
+
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String fromString = df.format(payment.from);
+        String toString = df.format(payment.to);
+        String dateBook = fromString  + " - " + toString;
 
         topUpBalance = findViewById(R.id.PaymentActivityTopUpAmount);
         roomName.setText(room.name);
-        dateFrom.setText(MainActivity.payment.from.toString());
-        dateTo.setText(MainActivity.payment.to.toString());
-        roomPrice.setText(NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format(room.price.price));
+        date.setText(dateBook);
+        paymentStatus.setText(payment.status.toString());
         accountBalance.setText(NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format(MainActivity.loginAccount.balance));
+        totalPrice.setText(NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format(payment.totalPrice));
 
-        topUpDown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                topUpDown.setVisibility(ImageButton.GONE);
-                topUpUp.setVisibility(ImageButton.VISIBLE);
-                topUp.setVisibility(LinearLayout.VISIBLE);
+        if (payment.status == Invoice.PaymentStatus.SUCCESS || payment.status == Invoice.PaymentStatus.FAILED) {
+            successOrFailedStatus();
+        }
+        if (payment.status == Invoice.PaymentStatus.WAITING) {
+            secondaryLayout.setVisibility(LinearLayout.VISIBLE);
+            backToMain.setVisibility(LinearLayout.GONE);
+            topUpDown.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    topUpDown.setVisibility(ImageButton.GONE);
+                    topUpUp.setVisibility(ImageButton.VISIBLE);
+                    topUp.setVisibility(LinearLayout.VISIBLE);
 
-                topUpButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        topUpAccount();
-                    }
-                });
-            }
-        });
+                    topUpButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            topUpAccount();
+                        }
+                    });
+                }
+            });
 
-        topUpUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                topUpDown.setVisibility(ImageButton.VISIBLE);
-                topUpUp.setVisibility(ImageButton.GONE);
-                topUp.setVisibility(LinearLayout.GONE);
-            }
-        });
+            topUpUp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    topUpDown.setVisibility(ImageButton.VISIBLE);
+                    topUpUp.setVisibility(ImageButton.GONE);
+                    topUp.setVisibility(LinearLayout.GONE);
+                }
+            });
 
-        acceptPayment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                acceptPayment();
-            }
-        });
+            acceptPayment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    acceptPayment();
+                }
+            });
 
-        cancelPayment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               cancelPayment();
-            }
-        });
+            cancelPayment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    cancelPayment();
+                }
+            });
+        }
     }
 
     protected void acceptPayment() {
@@ -119,8 +139,8 @@ public class PaymentActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     paymentCheck = response.body();
                     Toast.makeText(mContext, "Payment Successful!", Toast.LENGTH_SHORT).show();
-                    Intent move = new Intent(PaymentActivity.this, MainActivity.class);
-                    startActivity(move);
+                    paymentStatus.setText(Invoice.PaymentStatus.SUCCESS.toString());
+                    successOrFailedStatus();
                 }
             }
 
@@ -142,8 +162,10 @@ public class PaymentActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     paymentCheck = response.body();
                     Toast.makeText(mContext, "Payment Cancelled!", Toast.LENGTH_SHORT).show();
-                    Intent move = new Intent(PaymentActivity.this, MainActivity.class);
-                    startActivity(move);
+                    MainActivity.loginAccount.balance += payment.totalPrice;
+                    accountBalance.setText(String.valueOf(MainActivity.loginAccount.balance));
+                    paymentStatus.setText(Invoice.PaymentStatus.FAILED.toString());
+                    successOrFailedStatus();
                 }
             }
 
@@ -165,7 +187,8 @@ public class PaymentActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     topUpCheck = response.body();
                     Toast.makeText(mContext, "Top Up Successful!", Toast.LENGTH_SHORT).show();
-                    accountBalance.setText(String.valueOf(MainActivity.loginAccount.balance + Double.parseDouble(topUpBalance.getText().toString())));
+                    MainActivity.loginAccount.balance += Double.parseDouble(topUpBalance.getText().toString());
+                    accountBalance.setText(String.valueOf(MainActivity.loginAccount.balance));
                 }
             }
 
@@ -177,4 +200,15 @@ public class PaymentActivity extends AppCompatActivity {
         });
     }
 
+    private void successOrFailedStatus() {
+        secondaryLayout.setVisibility(LinearLayout.GONE);
+        backToMain.setVisibility(LinearLayout.VISIBLE);
+        backToMainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent move = new Intent(PaymentActivity.this, MainActivity.class);
+                startActivity(move);
+            }
+        });
+    }
 }

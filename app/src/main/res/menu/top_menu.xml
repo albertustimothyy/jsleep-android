@@ -6,6 +6,10 @@
         android:title="Search Button"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="collapseActionView|always"/>
+<!--    <item android:id="@+id/history_button"-->
+<!--        android:icon="@drawable/ic_baseline_history_24"-->
+<!--        android:title="History Button"-->
+<!--        app:showAsAction="collapseActionView|always"/>-->
     <item android:id="@+id/person_button"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="Person Button"

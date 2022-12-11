@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,9 +14,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.Account;
+
+
 import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.BedType;
 import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.City;
 import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.Facility;
@@ -37,8 +36,6 @@ public class CreateRoomActivity extends AppCompatActivity {
     Button create, cancel;
     CheckBox ac, refrigerator, wifi, bathUb, balcony, restaurant, swimmingPool, fitnessCenter;
     private ArrayList<Facility> facilityList =  new ArrayList<>();
-    City cityData;
-    BedType bedTypeData;
 
 
     @Override

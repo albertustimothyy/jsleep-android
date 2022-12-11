@@ -214,7 +214,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:orientation="vertical"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/AboutMePrimaryLayout"
             tools:layout_editor_absoluteX="0dp">
 
@@ -319,7 +319,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@+id/AboutMePrimaryLayout"
             tools:layout_editor_absoluteX="0dp">
 
@@ -424,12 +424,29 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/RegisterRenterBackToMain"
+                android:id="@+id/RegisterRenterPaymentList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:gravity="center"
                 app:layout_constraintTop_toBottomOf="@+id/AboutMeEmailLayout"
+                tools:layout_editor_absoluteX="0dp">
+
+                <Button
+                    android:id="@+id/RegisterRenterPaymentListButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="see my booking history"
+                    android:textColorHint="#959595" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/RegisterRenterBackToMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@+id/RegisterRenterBackToMain"
                 tools:layout_editor_absoluteX="0dp">
 
                 <Button

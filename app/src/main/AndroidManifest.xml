@@ -15,6 +15,13 @@
         android:theme="@style/Theme.Jsleepandroid"
         tools:targetApi="31">
         <activity
+            android:name=".RenterBookingHistoryActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".PaymentActivity"
             android:exported="false">
             <meta-data

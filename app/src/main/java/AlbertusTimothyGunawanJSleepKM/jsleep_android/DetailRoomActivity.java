@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 import AlbertusTimothyGunawanJSleepKM.jsleep_android.model.Facility;
@@ -42,17 +44,22 @@ public class DetailRoomActivity extends AppCompatActivity {
     LinearLayout bookLayout, buttonLayout;
     DatePickerDialog datePickerDialog;
     private Payment makePayment;
+    public static List<Payment> paymentByRenterList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_room);
 
+        for (Room room : MainActivity.getRoom){
+            System.out.println(room.id + " | | " + room.name);
+        }
         mApiService = UtilsApi.getApiService();
         mContext = this;
-
+        System.out.println(MainActivity.roomPosition);
         room = MainActivity.getRoom.get(MainActivity.roomPosition);
-
+        System.out.println(room.id);
+        System.out.println(room.price.price);
         name = findViewById(R.id.DetailRoomNameInput);
         bedType = findViewById(R.id.DetailRoomBedTypeInput);
         size = findViewById(R.id.DetailRoomSizeInput);
@@ -184,9 +191,10 @@ public class DetailRoomActivity extends AppCompatActivity {
             public void onResponse(Call<Payment> call, Response<Payment> response) {
 
                 if(response.isSuccessful()){
+                    System.out.println(room.id);
                     MainActivity.payment = response.body();
                     Toast.makeText(mContext, "Make Booking Successful!", Toast.LENGTH_SHORT).show();
-                    Intent move = new Intent(DetailRoomActivity.this, PaymentActivity.class);
+                    Intent move = new Intent(DetailRoomActivity.this, MainActivity.class);
                     startActivity(move);
                 }
             }
@@ -199,4 +207,5 @@ public class DetailRoomActivity extends AppCompatActivity {
         });
         return null;
     }
+
 }
